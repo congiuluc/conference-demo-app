@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ConferenceApp.API\ConferenceApp.API.csproj" />
     <ProjectReference Include="..\ConferenceApp.UI\ConferenceApp.UI.csproj" />
     <ProjectReference Include="..\ConferenceApp.ServiceDefaults\ConferenceApp.ServiceDefaults.csproj" />
