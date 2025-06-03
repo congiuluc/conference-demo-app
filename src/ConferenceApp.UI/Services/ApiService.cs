@@ -11,15 +11,21 @@ public class ApiService
 {
     private readonly HttpClient _httpClient;
     private readonly ILogger<ApiService> _logger;
-    private readonly string _baseApiUrl;
+    private readonly string? _baseApiUrl;
 
     public ApiService(HttpClient httpClient, IConfiguration configuration, ILogger<ApiService> logger)
     {
         _httpClient = httpClient;
         _logger = logger;
-        _baseApiUrl = configuration["ApiSettings:BaseUrl"] ?? "https://localhost:5001";
         
-        _httpClient.BaseAddress = new Uri(_baseApiUrl);
+        // When running with Aspire, the HttpClient will be configured with service discovery
+        // Fall back to configuration if not available
+        if (_httpClient.BaseAddress == null)
+        {
+            _baseApiUrl = configuration["ApiSettings:BaseUrl"] ?? "https://localhost:5001";
+            _httpClient.BaseAddress = new Uri(_baseApiUrl);
+        }
+        
         _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
     }
 
