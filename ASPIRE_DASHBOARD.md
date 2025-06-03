@@ -2,6 +2,8 @@
 
 This repository now includes .NET Aspire Dashboard capabilities for monitoring the Conference Management System backend (API) and frontend (UI) applications.
 
+> **Important**: The applications can run **both with and without** .NET Aspire. Aspire provides enhanced monitoring and orchestration, but is not required for basic functionality.
+
 ## What Was Added
 
 ### 1. ConferenceApp.ServiceDefaults Project
@@ -27,7 +29,9 @@ This repository now includes .NET Aspire Dashboard capabilities for monitoring t
 
 ## How to Use
 
-### Option 1: Run with AppHost (Recommended)
+The Conference Management System supports both standalone and Aspire modes:
+
+### Option 1: Run with AppHost (Recommended for Development)
 ```bash
 cd src
 dotnet run --project ConferenceApp.AppHost
@@ -39,15 +43,31 @@ This will:
 - Show available application URLs
 - Provide observability information
 
-### Option 2: Run Applications Individually
+### Option 2: Run Applications Individually (Standalone Mode)
 ```bash
 # Terminal 1 - API
-cd src
-ASPNETCORE_URLS=https://localhost:5001 dotnet run --project ConferenceApp.API
+cd src/ConferenceApp.API
+dotnet run
 
 # Terminal 2 - UI  
-cd src
-ASPNETCORE_URLS=https://localhost:5000 dotnet run --project ConferenceApp.UI
+cd src/ConferenceApp.UI
+dotnet run --urls "https://localhost:5000"
+```
+
+**Standalone Mode Notes:**
+- Applications run independently without Aspire orchestration
+- Health checks (`/health`, `/alive`) still work
+- UI automatically connects to API using configured URL (`https://localhost:5001`)
+- OpenTelemetry features are available but without centralized dashboard
+- Perfect for production deployment without Aspire infrastructure
+
+### Option 3: Production Deployment (Standalone)
+```bash
+# Build for production
+dotnet publish src/ConferenceApp.API -c Release
+dotnet publish src/ConferenceApp.UI -c Release
+
+# Deploy as separate services
 ```
 
 ## Monitoring Endpoints
@@ -81,6 +101,7 @@ ASPNETCORE_URLS=https://localhost:5000 dotnet run --project ConferenceApp.UI
 
 ## Architecture
 
+### With Aspire (Orchestrated Mode)
 ```
 ConferenceApp.AppHost (Orchestrator)
 ├── ConferenceApp.API (Backend)
@@ -94,17 +115,47 @@ ConferenceApp.AppHost (Orchestrator)
 └── Monitoring Dashboard
 ```
 
+### Standalone Mode
+```
+ConferenceApp.API (Backend) ← HTTP → ConferenceApp.UI (Frontend)
+├── ServiceDefaults (Observability)     ├── ServiceDefaults (Observability)
+├── Health Checks                       ├── Health Checks
+└── OpenTelemetry                       └── Configured HTTP Client
+```
+
+### Key Differences
+
+| Component | Standalone Mode | Aspire Mode |
+|-----------|----------------|-------------|
+| **Service Communication** | Direct HTTP with configured URLs | Service discovery |
+| **Monitoring** | Individual health endpoints | Centralized dashboard |
+| **Startup** | Manual (each app separately) | Orchestrated (single command) |
+| **Dependencies** | Core ASP.NET + observability | Same + Aspire orchestration |
+| **Production Ready** | ✅ Traditional deployment | ✅ Cloud-native deployment |
+
 ## Benefits
 
+### Aspire Mode Benefits
 1. **Centralized Monitoring**: Single place to monitor all applications
-2. **Health Checks**: Automated health monitoring for both applications
-3. **Observability**: Complete telemetry data for debugging and monitoring
-4. **Service Discovery**: Automatic service endpoint resolution
-5. **Resilience**: Built-in retry and circuit breaker patterns
-6. **Development Experience**: Easy way to run and monitor the entire system
+2. **Service Discovery**: Automatic service endpoint resolution
+3. **Orchestration**: Single command to start entire system
+4. **Development Experience**: Integrated monitoring during development
+
+### Standalone Mode Benefits
+1. **Simplicity**: Traditional ASP.NET Core deployment
+2. **Independence**: No orchestration dependencies
+3. **Production Flexibility**: Deploy to any environment
+4. **Resource Efficiency**: No additional orchestration overhead
+
+### Shared Benefits (Both Modes)
+1. **Health Checks**: Automated health monitoring for both applications
+2. **Observability**: Complete telemetry data for debugging and monitoring
+3. **Resilience**: Built-in retry and circuit breaker patterns (when using HttpClient)
+4. **Modern Architecture**: OpenTelemetry integration ready for production backends
 
 ## Next Steps
 
+### For Aspire Mode (Production)
 To fully leverage .NET Aspire Dashboard in production:
 
 1. **Configure OTLP Exporter**: Set `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable
@@ -112,6 +163,15 @@ To fully leverage .NET Aspire Dashboard in production:
 3. **Configure Service Discovery**: Use service mesh or service registry in production
 4. **Add Custom Metrics**: Implement application-specific metrics
 5. **Configure Alerting**: Set up alerts based on health check failures
+
+### For Standalone Mode (Production)
+To deploy in standalone mode:
+
+1. **Configure Load Balancer**: Point UI to API through load balancer
+2. **Set API Base URL**: Configure `ApiSettings:BaseUrl` in UI appsettings
+3. **Set up Monitoring**: Use existing APM tools with OpenTelemetry endpoints
+4. **Configure Health Checks**: Use `/health` and `/alive` endpoints for orchestration
+5. **Deploy Independently**: Each application can scale and deploy separately
 
 ## Troubleshooting
 
