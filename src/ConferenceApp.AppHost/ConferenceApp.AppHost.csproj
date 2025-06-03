@@ -5,12 +5,17 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsAspireHost>true</IsAspireHost>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.1" />
+    <PackageReference Include="Aspire.Hosting.Azure.CosmosDB" Version="8.0.1" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ConferenceApp.API\ConferenceApp.API.csproj" />
     <ProjectReference Include="..\ConferenceApp.UI\ConferenceApp.UI.csproj" />
-    <ProjectReference Include="..\ConferenceApp.ServiceDefaults\ConferenceApp.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\ConferenceApp.ServiceDefaults\ConferenceApp.ServiceDefaults.csproj" IsAspireProjectResource="false" />
   </ItemGroup>
 
 </Project>
