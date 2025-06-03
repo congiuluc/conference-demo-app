@@ -1,0 +1,120 @@
+@model Speaker
+
+@{
+    ViewData["Title"] = "Edit Speaker";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Edit Speaker</h2>
+            
+            <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="Id" />
+                
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Company" class="form-label"></label>
+                    <input asp-for="Company" class="form-control" />
+                    <span asp-validation-for="Company" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" type="email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Phone" class="form-label"></label>
+                    <input asp-for="Phone" type="tel" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Bio" class="form-label"></label>
+                    <textarea asp-for="Bio" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Bio" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Website" class="form-label"></label>
+                    <input asp-for="Website" type="url" class="form-control" />
+                    <span asp-validation-for="Website" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="TwitterHandle" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text">@@</span>
+                        <input asp-for="TwitterHandle" class="form-control" />
+                    </div>
+                    <span asp-validation-for="TwitterHandle" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LinkedInProfile" class="form-label"></label>
+                    <input asp-for="LinkedInProfile" type="url" class="form-control" />
+                    <span asp-validation-for="LinkedInProfile" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-lg"></i> Update Speaker
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info">
+                        <i class="bi bi-eye"></i> View Details
+                    </a>
+                </div>
+            </form>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Speaker Information</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Created:</strong> @Model.CreatedDate.ToString("MM/dd/yyyy")</p>
+                    <p><strong>Last Updated:</strong> @(Model.ModifiedDate?.ToString("MM/dd/yyyy") ?? "Never")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Bootstrap form validation
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

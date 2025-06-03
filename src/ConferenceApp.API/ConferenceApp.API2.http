@@ -1,0 +1,138 @@
+@api_HostAddress = http://localhost:5001
+
+# Variable placeholders - replace with actual IDs after creating entities
+@conferenceId = replace_with_actual_conference_id
+@speakerId = replace_with_actual_speaker_id
+@sessionId = replace_with_actual_session_id
+@attendeeId = replace_with_actual_attendee_id
+@venueId = replace_with_actual_venue_id
+@callForPaperId = replace_with_actual_cfp_id
+@agendaDayId = replace_with_actual_agenda_day_id
+
+# Call for Papers API
+
+### Get all Call for Papers
+GET {{api_HostAddress}}/api/callforpapers
+Accept: application/json
+
+### Get Call for Papers by conference
+GET {{api_HostAddress}}/api/callforpapers/conference/{{conferenceId}}
+Accept: application/json
+
+### Get Call for Paper by ID
+GET {{api_HostAddress}}/api/callforpapers/{{callForPaperId}}
+Accept: application/json
+
+### Create a new Call for Paper
+POST {{api_HostAddress}}/api/callforpapers
+Content-Type: application/json
+
+{
+  "conferenceId": "{{conferenceId}}",
+  "title": "Call for Papers - Innovate Tech Conference 2025",
+  "description": "We're looking for speakers to share their knowledge and experience at Innovate Tech Conference 2025. Submit your proposal now!",
+  "startDate": "2025-01-01T00:00:00Z",
+  "deadline": "2025-03-15T23:59:59Z",
+  "topics": ["AI/ML", "Cloud Computing", "DevOps", "Frontend", "Backend", "Mobile", "Security", "Blockchain"],
+  "sessionTypes": ["Talk", "Workshop", "Panel", "Lightning Talk"],
+  "evaluationCriteria": "Proposals will be evaluated based on originality, relevance, and speaker experience.",
+  "contactEmail": "cfp@innovatetechconf.example.com",
+  "infoUrl": "https://innovatetechconf.example.com/cfp",
+  "isOpen": true
+}
+
+### Close a Call for Paper
+POST {{api_HostAddress}}/api/callforpapers/{{callForPaperId}}/close
+Content-Type: application/json
+
+### Submit a session proposal to a Call for Paper
+POST {{api_HostAddress}}/api/callforpapers/{{callForPaperId}}/submit
+Content-Type: application/json
+
+{  "title": "Building Scalable APIs with .NET 8",
+  "description": "Learn how to build high-performance, scalable APIs using the latest features in .NET 8.",
+  "startTime": "2025-06-01T10:00:00Z",
+  "endTime": "2025-06-01T11:30:00Z",
+  "track": "Backend",
+  "sessionType": "Talk",
+  "speakerIds": ["{{speakerId}}"],
+  "level": "Intermediate",
+  "tags": ["API", ".NET", "C#", "Performance"]
+}
+
+# Agenda API
+
+### Get all Agenda Days
+GET {{api_HostAddress}}/api/agenda
+Accept: application/json
+
+### Get Agenda Days by conference
+GET {{api_HostAddress}}/api/agenda/conference/{{conferenceId}}
+Accept: application/json
+
+### Get Agenda Day by ID
+GET {{api_HostAddress}}/api/agenda/{{agendaDayId}}
+Accept: application/json
+
+### Get Agenda by conference and date
+GET {{api_HostAddress}}/api/agenda/conference/{{conferenceId}}/date/2025-06-01
+Accept: application/json
+
+### Create a new Agenda Day
+POST {{api_HostAddress}}/api/agenda
+Content-Type: application/json
+
+{
+  "conferenceId": "{{conferenceId}}",
+  "date": "2025-06-01",
+  "title": "Day 1 - Opening Day",
+  "description": "The first day of the conference featuring keynotes and introductory sessions.",
+  "timeSlotsByTrack": {
+    "General": [
+      {
+        "title": "Registration and Coffee",
+        "startTime": "2025-06-01T08:00:00Z",
+        "endTime": "2025-06-01T09:00:00Z",
+        "slotType": "Break"
+      },
+      {
+        "title": "Opening Keynote",
+        "startTime": "2025-06-01T09:00:00Z",
+        "endTime": "2025-06-01T10:00:00Z",
+        "slotType": "Keynote",
+        "venueId": "{{venueId}}",
+        "room": "Main Hall"
+      }
+    ]
+  }
+}
+
+### Add a session to the agenda
+POST {{api_HostAddress}}/api/agenda/{{agendaDayId}}/sessions/{{sessionId}}?track=Backend&venueId={{venueId}}&room=Room%20101
+Content-Type: application/json
+
+### Remove a session from the agenda
+DELETE {{api_HostAddress}}/api/agenda/{{agendaDayId}}/sessions/{{sessionId}}
+
+# Session Management API
+
+### Get sessions by status
+GET {{api_HostAddress}}/api/sessionmanagement/status/Proposed
+Accept: application/json
+
+### Get sessions by conference and status
+GET {{api_HostAddress}}/api/sessionmanagement/conference/{{conferenceId}}/status/Accepted
+Accept: application/json
+
+### Update session status
+PUT {{api_HostAddress}}/api/sessionmanagement/{{sessionId}}/status/Accepted
+Content-Type: application/json
+
+### Add review notes to session
+PUT {{api_HostAddress}}/api/sessionmanagement/{{sessionId}}/review
+Content-Type: application/json
+
+{
+  "notes": "Great proposal! We'd like to accept it for the main track.",
+  "status": "Accepted"
+}

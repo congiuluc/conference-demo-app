@@ -1,0 +1,182 @@
+@model Session
+
+@{
+    ViewData["Title"] = "Session Details";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-calendar-event"></i> @Model.Title
+                    </h3>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        <p class="lead">@Model.Description</p>
+                        <hr />
+                    }
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-5">Start Time:</dt>
+                                <dd class="col-sm-7">@Model.StartTime.ToString("MMMM dd, yyyy 'at' hh:mm tt")</dd>
+
+                                <dt class="col-sm-5">End Time:</dt>
+                                <dd class="col-sm-7">@Model.EndTime.ToString("MMMM dd, yyyy 'at' hh:mm tt")</dd>
+
+                                <dt class="col-sm-5">Duration:</dt>
+                                <dd class="col-sm-7">@Model.Duration minutes</dd>
+
+                                <dt class="col-sm-5">Location:</dt>
+                                <dd class="col-sm-7">@(Model.Location ?? "TBD")</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-5">Max Attendees:</dt>
+                                <dd class="col-sm-7">@Model.MaxAttendees</dd>
+
+                                <dt class="col-sm-5">Conference:</dt>
+                                <dd class="col-sm-7">
+                                    <a asp-controller="Conferences" asp-action="Details" asp-route-id="@Model.ConferenceId">
+                                        View Conference <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                </dd>
+
+                                @if (!string.IsNullOrEmpty(Model.SpeakerId))
+                                {
+                                    <dt class="col-sm-5">Speaker:</dt>
+                                    <dd class="col-sm-7">
+                                        <a asp-controller="Speakers" asp-action="Details" asp-route-id="@Model.SpeakerId">
+                                            View Speaker <i class="bi bi-box-arrow-up-right"></i>
+                                        </a>
+                                    </dd>
+                                }
+                                else
+                                {
+                                    <dt class="col-sm-5">Speaker:</dt>
+                                    <dd class="col-sm-7">
+                                        <span class="text-muted">Not assigned</span>
+                                    </dd>
+                                }
+
+                                <dt class="col-sm-5">Created:</dt>
+                                <dd class="col-sm-7">@Model.CreatedDate.ToString("MM/dd/yyyy")</dd>
+
+                                <dt class="col-sm-5">Updated:</dt>
+                                <dd class="col-sm-7">@(Model.ModifiedDate?.ToString("MM/dd/yyyy") ?? "Never")</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                        <i class="bi bi-pencil"></i> Edit Session
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-controller="Attendees" asp-action="BySession" asp-route-sessionId="@Model.Id" class="btn btn-outline-primary">
+                            <i class="bi bi-people"></i> View Attendees
+                        </a>
+                        @if (!string.IsNullOrEmpty(Model.SpeakerId))
+                        {
+                            <a asp-controller="Speakers" asp-action="Details" asp-route-id="@Model.SpeakerId" class="btn btn-outline-success">
+                                <i class="bi bi-person-badge"></i> View Speaker
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-warning">
+                                <i class="bi bi-person-plus"></i> Assign Speaker
+                            </a>
+                        }
+                        <a asp-action="Create" class="btn btn-outline-secondary">
+                            <i class="bi bi-plus-lg"></i> Add Another Session
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Session Stats</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="border-end">
+                                <div class="h4 mb-0 text-primary">TBD</div>
+                                <small class="text-muted">Registered</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="h4 mb-0 text-success">@Model.MaxAttendees</div>
+                            <small class="text-muted">Capacity</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @{
+                var isUpcoming = Model.StartTime > DateTime.Now;
+                var isOngoing = Model.StartTime <= DateTime.Now && Model.EndTime >= DateTime.Now;
+                var isCompleted = Model.EndTime < DateTime.Now;
+            }
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Session Status</h6>
+                </div>
+                <div class="card-body">
+                    @if (isUpcoming)
+                    {
+                        <span class="badge bg-info fs-6">
+                            <i class="bi bi-clock"></i> Upcoming
+                        </span>
+                        <p class="mt-2 small text-muted">
+                            Starts @Model.StartTime.ToString("MMM dd 'at' hh:mm tt")
+                        </p>
+                    }
+                    else if (isOngoing)
+                    {
+                        <span class="badge bg-success fs-6">
+                            <i class="bi bi-play-circle"></i> In Progress
+                        </span>
+                        <p class="mt-2 small text-muted">
+                            Ends @Model.EndTime.ToString("'at' hh:mm tt")
+                        </p>
+                    }
+                    else if (isCompleted)
+                    {
+                        <span class="badge bg-secondary fs-6">
+                            <i class="bi bi-check-circle"></i> Completed
+                        </span>
+                        <p class="mt-2 small text-muted">
+                            Ended @Model.EndTime.ToString("MMM dd 'at' hh:mm tt")
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

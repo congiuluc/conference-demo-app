@@ -1,0 +1,219 @@
+@api_HostAddress = http://localhost:5001
+
+# Variable placeholders - replace with actual IDs after creating entities
+@conferenceId = replace_with_actual_conference_id
+@speakerId = replace_with_actual_speaker_id
+@sessionId = replace_with_actual_session_id
+@attendeeId = replace_with_actual_attendee_id
+@venueId = replace_with_actual_venue_id
+
+# Conferences API
+
+### Get all conferences
+GET {{api_HostAddress}}/api/conferences
+Accept: application/json
+
+### Get active conferences
+GET {{api_HostAddress}}/api/conferences/active
+Accept: application/json
+
+### Get conference by ID
+GET {{api_HostAddress}}/api/conferences/{{conferenceId}}
+Accept: application/json
+
+### Create a new conference
+POST {{api_HostAddress}}/api/conferences
+Content-Type: application/json
+
+{
+  "name": "Innovate Tech Conference 2025",
+  "description": "Annual developer conference focusing on the latest technologies and innovations in software development.",
+  "startDate": "2025-09-15T00:00:00Z",
+  "endDate": "2025-09-17T23:59:59Z",
+  "website": "https://innovatetechconf.example.com",
+  "logoUrl": "https://innovatetechconf.example.com/logo.png",
+  "isActive": true,
+  "categories": ["Cloud", "AI", "DevOps", "Web Development", "Mobile"]
+}
+
+### Get speakers for a conference
+GET {{api_HostAddress}}/api/conferences/{{conferenceId}}/speakers
+Accept: application/json
+
+### Get sessions for a conference
+GET {{api_HostAddress}}/api/conferences/{{conferenceId}}/sessions
+Accept: application/json
+
+### Get attendees for a conference
+GET {{api_HostAddress}}/api/conferences/{{conferenceId}}/attendees
+Accept: application/json
+
+### Get venues for a conference
+GET {{api_HostAddress}}/api/conferences/{{conferenceId}}/venues
+Accept: application/json
+
+# Speakers API
+
+### Get all speakers
+GET {{api_HostAddress}}/api/speakers
+Accept: application/json
+
+### Get speaker by ID
+GET {{api_HostAddress}}/api/speakers/{{speakerId}}
+Accept: application/json
+
+### Create a new speaker
+POST {{api_HostAddress}}/api/speakers
+Content-Type: application/json
+
+{
+  "conferenceId": "{{conferenceId}}",
+  "name": "John Doe",
+  "bio": "Experienced software engineer with expertise in .NET and cloud technologies.",
+  "company": "Microsoft",
+  "jobTitle": "Senior Software Engineer",
+  "photoUrl": "https://example.com/photo.jpg",
+  "email": "johndoe@example.com",
+  "website": "https://johndoe.dev",
+  "socialMedia": {
+    "twitter": "@johndoe",
+    "github": "johndoe",
+    "linkedin": "johndoe"
+  }
+}
+
+### Update speaker
+PUT {{api_HostAddress}}/api/speakers/{{speakerId}}
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "bio": "Updated bio with more information.",
+  "company": "Microsoft",
+  "jobTitle": "Principal Software Engineer",
+  "photoUrl": "https://example.com/photo.jpg",
+  "email": "johndoe@example.com",
+  "website": "https://johndoe.dev",
+  "socialMedia": {
+    "twitter": "@johndoe",
+    "github": "johndoe",
+    "linkedin": "johndoe"
+  }
+}
+
+### Delete speaker
+DELETE {{api_HostAddress}}/api/speakers/{{speakerId}}
+
+# Sessions API
+
+### Get all sessions
+GET {{api_HostAddress}}/api/sessions
+Accept: application/json
+
+### Get session by ID
+GET {{api_HostAddress}}/api/sessions/{{sessionId}}
+Accept: application/json
+
+### Get sessions by track
+GET {{api_HostAddress}}/api/sessions/track/Frontend
+Accept: application/json
+
+### Get sessions by tag
+GET {{api_HostAddress}}/api/sessions/tag/AI
+Accept: application/json
+
+### Get sessions by speaker
+GET {{api_HostAddress}}/api/sessions/speaker/{{speakerId}}
+Accept: application/json
+
+### Create a new session
+POST {{api_HostAddress}}/api/sessions
+Content-Type: application/json
+
+{
+  "conferenceId": "{{conferenceId}}",
+  "title": "Introduction to .NET 8",
+  "description": "Learn about the latest features and improvements in .NET 8.",
+  "startTime": "2025-07-10T09:00:00Z",
+  "endTime": "2025-07-10T10:30:00Z",
+  "track": "Backend",
+  "location": "Main Hall",
+  "maxAttendees": 300,
+  "speakerIds": ["{{speakerId}}"],
+  "level": "Intermediate",
+  "tags": ["dotnet", "csharp", "backend"]
+}
+
+# Attendees API
+
+### Get all attendees
+GET {{api_HostAddress}}/api/attendees
+Accept: application/json
+
+### Get attendee by ID
+GET {{api_HostAddress}}/api/attendees/{{attendeeId}}
+Accept: application/json
+
+### Get attendees by session
+GET {{api_HostAddress}}/api/attendees/session/{{sessionId}}
+Accept: application/json
+
+### Create a new attendee
+POST {{api_HostAddress}}/api/attendees
+Content-Type: application/json
+
+{
+  "conferenceId": "{{conferenceId}}",
+  "name": "Jane Smith",
+  "email": "janesmith@example.com",
+  "company": "Contoso",
+  "jobTitle": "Software Developer"
+}
+
+### Register attendee for session
+POST {{api_HostAddress}}/api/attendees/{{attendeeId}}/register/{{sessionId}}
+
+### Unregister attendee from session
+POST {{api_HostAddress}}/api/attendees/{{attendeeId}}/unregister/{{sessionId}}
+
+# Venues API
+
+### Get all venues
+GET {{api_HostAddress}}/api/venues
+Accept: application/json
+
+### Get venue by ID
+GET {{api_HostAddress}}/api/venues/{{venueId}}
+Accept: application/json
+
+### Create a new venue
+POST {{api_HostAddress}}/api/venues
+Content-Type: application/json
+
+{
+  "conferenceId": "{{conferenceId}}",
+  "name": "Conference Center",
+  "address": "123 Main St",
+  "city": "Seattle",
+  "state": "WA",
+  "zipCode": "98101",
+  "country": "USA",
+  "capacity": 1000,
+  "rooms": [
+    {
+      "name": "Main Hall",
+      "capacity": 500,
+      "equipment": ["Projector", "Microphone", "Sound System"]
+    },
+    {
+      "name": "Workshop Room 1",
+      "capacity": 100,
+      "equipment": ["Projector", "Whiteboards"]
+    },
+    {
+      "name": "Workshop Room 2",
+      "capacity": 100,
+      "equipment": ["Projector", "Whiteboards"]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Conference API",
+			"type": "shell",
+			"command": "dotnet watch run",
+			"group": "build",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"isBackground": true
+		}
+	]
+}

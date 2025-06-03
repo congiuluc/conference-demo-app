@@ -1,0 +1,186 @@
+@model Attendee
+
+@{
+    ViewData["Title"] = "Attendee Details";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-person"></i> @Model.FirstName @Model.LastName
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">
+                                    <a href="mailto:@Model.Email">@Model.Email</a>
+                                </dd>
+
+                                <dt class="col-sm-4">Phone:</dt>
+                                <dd class="col-sm-8">
+                                    @if (!string.IsNullOrEmpty(Model.Phone))
+                                    {
+                                        <a href="tel:@Model.Phone">@Model.Phone</a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Not provided</span>
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-4">Company:</dt>
+                                <dd class="col-sm-8">@(Model.Company ?? "Not specified")</dd>
+
+                                <dt class="col-sm-4">Job Title:</dt>
+                                <dd class="col-sm-8">@(Model.JobTitle ?? "Not specified")</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-5">Conference:</dt>
+                                <dd class="col-sm-7">
+                                    <a asp-controller="Conferences" asp-action="Details" asp-route-id="@Model.ConferenceId">
+                                        View Conference <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                </dd>
+
+                                <dt class="col-sm-5">Registration:</dt>
+                                <dd class="col-sm-7">@Model.RegistrationDate.ToString("MMMM dd, yyyy")</dd>
+
+                                <dt class="col-sm-5">Status:</dt>
+                                <dd class="col-sm-7">
+                                    @if (Model.IsConfirmed)
+                                    {
+                                        <span class="badge bg-success">Confirmed</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning">Pending Confirmation</span>
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-5">Added:</dt>
+                                <dd class="col-sm-7">@Model.CreatedDate.ToString("MM/dd/yyyy")</dd>
+
+                                <dt class="col-sm-5">Updated:</dt>
+                                <dd class="col-sm-7">@(Model.ModifiedDate?.ToString("MM/dd/yyyy") ?? "Never")</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Bio))
+                    {
+                        <hr />
+                        <h5>Biography</h5>
+                        <p class="text-muted">@Model.Bio</p>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                        <i class="bi bi-pencil"></i> Edit Attendee
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="mailto:@Model.Email?subject=Conference Information" class="btn btn-outline-primary">
+                            <i class="bi bi-envelope"></i> Send Email
+                        </a>
+                        @if (!Model.IsConfirmed)
+                        {
+                            <button type="button" class="btn btn-outline-success" onclick="confirmAttendance('@Model.Id')">
+                                <i class="bi bi-check-circle"></i> Confirm Attendance
+                            </button>
+                        }
+                        <a asp-controller="Sessions" asp-action="ByAttendee" asp-route-attendeeId="@Model.Id" class="btn btn-outline-info">
+                            <i class="bi bi-calendar-event"></i> View Sessions
+                        </a>
+                        <a asp-action="Create" class="btn btn-outline-secondary">
+                            <i class="bi bi-plus-lg"></i> Add Another Attendee
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Attendee Profile</h6>
+                </div>
+                <div class="card-body text-center">
+                    <div class="avatar-circle-large mx-auto mb-3">
+                        @Model.FirstName.Substring(0, 1)@Model.LastName.Substring(0, 1)
+                    </div>
+                    <h6 class="card-title">@Model.FirstName @Model.LastName</h6>
+                    @if (!string.IsNullOrEmpty(Model.JobTitle))
+                    {
+                        <p class="card-text text-muted">@Model.JobTitle</p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Company))
+                    {
+                        <p class="card-text"><small class="text-muted">@Model.Company</small></p>
+                    }
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Attendance Stats</h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <i class="bi bi-calendar-event"></i> Sessions Registered: <span class="badge bg-primary">TBD</span>
+                    </p>
+                    <p class="card-text">
+                        <i class="bi bi-check-circle"></i> Sessions Attended: <span class="badge bg-success">TBD</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .avatar-circle-large {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #6c757d;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 24px;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        function confirmAttendance(attendeeId) {
+            if (confirm('Confirm this attendee\'s registration?')) {
+                // Here you would make an AJAX call to update the confirmation status
+                // For now, we'll just reload the page
+                window.location.reload();
+            }
+        }
+    </script>
+}

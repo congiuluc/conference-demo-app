@@ -1,0 +1,149 @@
+@model Session
+
+@{
+    ViewData["Title"] = "Edit Session";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Edit Session</h2>
+            
+            <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="Id" />
+                
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label"></label>
+                    <input asp-for="Title" class="form-control" required />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="StartTime" class="form-label"></label>
+                            <input asp-for="StartTime" type="datetime-local" class="form-control" required />
+                            <span asp-validation-for="StartTime" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="EndTime" class="form-label"></label>
+                            <input asp-for="EndTime" type="datetime-local" class="form-control" required />
+                            <span asp-validation-for="EndTime" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="Duration" class="form-label"></label>
+                            <div class="input-group">
+                                <input asp-for="Duration" type="number" class="form-control" min="15" step="15" required />
+                                <span class="input-group-text">minutes</span>
+                            </div>
+                            <span asp-validation-for="Duration" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="MaxAttendees" class="form-label"></label>
+                            <input asp-for="MaxAttendees" type="number" class="form-control" min="1" required />
+                            <span asp-validation-for="MaxAttendees" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Location" class="form-label"></label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ConferenceId" class="form-label"></label>
+                    <select asp-for="ConferenceId" class="form-select" required>
+                        <option value="">Select a conference...</option>
+                    </select>
+                    <span asp-validation-for="ConferenceId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SpeakerId" class="form-label"></label>
+                    <select asp-for="SpeakerId" class="form-select">
+                        <option value="">Select a speaker (optional)...</option>
+                    </select>
+                    <span asp-validation-for="SpeakerId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-lg"></i> Update Session
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info">
+                        <i class="bi bi-eye"></i> View Details
+                    </a>
+                </div>
+            </form>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Session Information</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Created:</strong> @Model.CreatedDate.ToString("MM/dd/yyyy")</p>
+                    <p><strong>Last Updated:</strong> @(Model.ModifiedDate?.ToString("MM/dd/yyyy") ?? "Never")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Bootstrap form validation
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        // Auto-calculate end time based on start time and duration
+        document.getElementById('StartTime').addEventListener('change', updateEndTime);
+        document.getElementById('Duration').addEventListener('change', updateEndTime);
+
+        function updateEndTime() {
+            const startTime = document.getElementById('StartTime').value;
+            const duration = parseInt(document.getElementById('Duration').value) || 60;
+            
+            if (startTime) {
+                const start = new Date(startTime);
+                const end = new Date(start.getTime() + duration * 60000);
+                document.getElementById('EndTime').value = end.toISOString().slice(0, 16);
+            }
+        }
+    </script>
+}
