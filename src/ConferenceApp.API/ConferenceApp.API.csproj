@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConferenceApp.Shared\ConferenceApp.Shared.csproj" />
+    <ProjectReference Include="..\ConferenceApp.ServiceDefaults\ConferenceApp.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

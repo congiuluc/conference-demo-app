@@ -15,11 +15,20 @@ This application provides a complete solution for managing tech conferences, inc
 
 ## Architecture
 
-The solution consists of three main projects:
+The solution consists of these main projects:
 
 - **ConferenceApp.API**: ASP.NET Core 8 Web API with REST endpoints
 - **ConferenceApp.UI**: ASP.NET Core 8 MVC web application
 - **ConferenceApp.Shared**: Shared models and validation logic
+- **ConferenceApp.ServiceDefaults**: Shared observability and health check configuration
+- **ConferenceApp.AppHost**: .NET Aspire application orchestrator (optional)
+
+### Deployment Options
+
+The application supports two deployment patterns:
+
+1. **Standalone Mode**: Run API and UI independently without orchestration
+2. **Aspire Mode**: Run with .NET Aspire Dashboard for enhanced monitoring and orchestration
 
 ## Prerequisites
 
@@ -72,7 +81,13 @@ dotnet build
 
 ### 4. Run the Applications
 
-#### Start the API (Backend)
+You can run the applications in two ways:
+
+#### Option 1: Standalone Mode (No Aspire Required)
+
+This is the traditional way to run ASP.NET Core applications independently:
+
+##### Start the API (Backend)
 
 ```bash
 cd src/ConferenceApp.API
@@ -83,10 +98,10 @@ The API will be available at:
 - HTTPS: `https://localhost:5001`
 - HTTP: `http://localhost:5000`
 - Swagger UI: `https://localhost:5001/swagger`
+- Health Check: `https://localhost:5001/health`
+- Liveness Check: `https://localhost:5001/alive`
 
-Note: If you encounter certificate warnings, you can run `dotnet dev-certs https --trust` to trust the development certificate.
-
-#### Start the UI (Frontend)
+##### Start the UI (Frontend)
 
 In a new terminal:
 
@@ -98,8 +113,32 @@ dotnet run --launch-profile https
 The web application will be available at:
 - HTTPS: `https://localhost:7064`
 - HTTP: `http://localhost:5096`
+- Health Check: `https://localhost:7064/health`
+- Liveness Check: `https://localhost:7064/alive`
 
-Note: If you encounter certificate warnings, you can run `dotnet dev-certs https --trust` to trust the development certificate.
+**Note**: The UI is configured to automatically connect to the API at `https://localhost:5001` when running standalone.
+
+#### Option 2: Aspire Mode (With Monitoring Dashboard)
+
+For enhanced monitoring and orchestration, use .NET Aspire:
+
+```bash
+cd src
+dotnet run --project ConferenceApp.AppHost
+```
+
+This will:
+- Start both API and UI applications automatically
+- Provide a centralized monitoring dashboard
+- Display application URLs and health status
+- Enable distributed tracing and metrics collection
+
+Applications will be available at:
+- **API**: `https://localhost:5001` (with observability)
+- **UI**: `https://localhost:5000` (with service discovery)
+- **Monitoring**: Check console output for dashboard URLs
+
+**Note**: When using Aspire mode, the UI automatically discovers the API through service discovery.
 
 ## API Documentation
 
@@ -135,7 +174,12 @@ conference-demo-app/
 │   ├── ConferenceApp.Shared/       # Shared library
 │   │   ├── Models/                 # Domain models
 │   │   └── Validators/             # FluentValidation validators
+│   ├── ConferenceApp.ServiceDefaults/ # Observability configuration
+│   │   └── Extensions.cs           # Health checks, OpenTelemetry, service discovery
+│   ├── ConferenceApp.AppHost/      # Aspire orchestrator (optional)
+│   │   └── Program.cs              # Application host configuration
 │   └── ConferenceApp.sln           # Solution file
+├── ASPIRE_DASHBOARD.md             # Aspire monitoring documentation
 └── README.md                       # This file
 ```
 
@@ -168,6 +212,8 @@ conference-demo-app/
 - **Database**: Azure Cosmos DB
 - **Validation**: FluentValidation
 - **Documentation**: Swagger/OpenAPI
+- **Monitoring**: OpenTelemetry with health checks
+- **Orchestration**: .NET Aspire (optional)
 - **Dependency Injection**: Built-in ASP.NET Core DI
 
 ## Configuration
@@ -185,6 +231,31 @@ The application uses standard ASP.NET Core configuration. Key settings in `appse
 - FluentValidation ensures data integrity across all operations
 - The application follows repository pattern with Cosmos DB service abstraction
 - CORS is configured to allow cross-origin requests for development
+
+### Standalone vs Aspire Mode
+
+| Feature | Standalone Mode | Aspire Mode |
+|---------|----------------|-------------|
+| **Startup** | Run each app individually | Single command starts both |
+| **Service Discovery** | Uses configured API URL | Automatic service discovery |
+| **Monitoring** | Basic health endpoints | Full dashboard with metrics |
+| **Dependencies** | Core .NET packages only | Additional observability packages |
+| **Production** | Traditional deployment | Enhanced monitoring/observability |
+| **Development** | Familiar ASP.NET Core experience | Integrated development environment |
+
+**When to use Standalone Mode:**
+- Simple development scenarios
+- Production deployments with existing monitoring
+- When you don't need .NET Aspire features
+- Minimal dependencies preferred
+
+**When to use Aspire Mode:**
+- Local development with multiple services
+- Want integrated monitoring and observability
+- Building cloud-native applications
+- Need distributed tracing and service discovery
+
+For detailed information about .NET Aspire features, see [ASPIRE_DASHBOARD.md](ASPIRE_DASHBOARD.md).
 
 ## Contributing
 

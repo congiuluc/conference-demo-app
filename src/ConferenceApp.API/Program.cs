@@ -9,6 +9,9 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add service defaults & Aspire components
+builder.AddServiceDefaults();
+
 // Load configuration
 var cosmosDbConfig = builder.Configuration.GetSection("CosmosDb").Get<CosmosDbConfig>() ?? new CosmosDbConfig
 {
@@ -141,6 +144,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors();
+
+// Map default endpoints for health checks
+app.MapDefaultEndpoints();
 
 // Map the endpoints from all registered endpoint classes
 using (var scope = app.Services.CreateScope())
