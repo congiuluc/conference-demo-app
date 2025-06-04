@@ -3,108 +3,116 @@
     ViewData["Title"] = Model.Name;
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <!-- Conference Header -->
-            <div class="card mb-4 shadow">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            @if (!string.IsNullOrEmpty(Model.LogoUrl))
+<div class="space-y-6">
+    <!-- Page Header -->
+    <div class="flex items-center space-x-3">
+        <div class="p-2 bg-blue-100 rounded-lg">
+            <i class="fas fa-calendar-alt text-blue-600 text-xl"></i>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900">@Model.Name</h1>
+    </div>
+
+    <!-- Conference Header Card -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <div class="lg:w-1/4">
+                    @if (!string.IsNullOrEmpty(Model.LogoUrl))
+                    {
+                        <img src="@Model.LogoUrl" class="w-full h-40 object-cover rounded-lg" alt="@Model.Name" />
+                    }
+                    else
+                    {
+                        <div class="w-full h-40 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center rounded-lg">
+                            <i class="fas fa-calendar-alt text-white text-4xl"></i>
+                        </div>
+                    }
+                </div>
+                <div class="lg:w-3/4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">@Model.Name</h2>
+                            <p class="text-lg text-gray-600 mb-4">@Model.Description</p>
+                        </div>
+                        <div class="mt-2 sm:mt-0 sm:ml-4">
+                            @if (Model.IsActive)
                             {
-                                <img src="@Model.LogoUrl" class="img-fluid rounded" alt="@Model.Name" />
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">Active</span>
                             }
                             else
                             {
-                                <div class="bg-primary text-white d-flex align-items-center justify-content-center rounded" style="height: 150px;">
-                                    <i class="fas fa-calendar-alt fa-3x"></i>
-                                </div>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">Inactive</span>
                             }
                         </div>
-                        <div class="col-md-9">
-                            <div class="d-flex justify-content-between align-items-start">
+                    </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
-                                    <h1 class="display-5 mb-2">@Model.Name</h1>
-                                    <p class="lead text-muted mb-3">@Model.Description</p>
+                                    <h6 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                        <i class="fas fa-calendar-alt mr-2"></i> Date
+                                    </h6>
+                                    <p class="text-gray-900">@Model.StartDate.ToString("MMMM dd, yyyy") - @Model.EndDate.ToString("MMMM dd, yyyy")</p>
                                 </div>
-                                <div class="text-end">
-                                    @if (Model.IsActive)
-                                    {
-                                        <span class="badge bg-success fs-6">Active</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge bg-secondary fs-6">Inactive</span>
-                                    }
+                                <div>
+                                    <h6 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                        <i class="fas fa-map-marker-alt mr-2"></i> Location
+                                    </h6>
+                                    <p class="text-gray-900">@Model.Location</p>
                                 </div>
                             </div>
                             
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <h6 class="text-muted mb-1">
-                                        <i class="fas fa-calendar-alt"></i> Date
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <h6 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                        <i class="fas fa-users mr-2"></i> Attendees
                                     </h6>
-                                    <p>@Model.StartDate.ToString("MMMM dd, yyyy") - @Model.EndDate.ToString("MMMM dd, yyyy")</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6 class="text-muted mb-1">
-                                        <i class="fas fa-map-marker-alt"></i> Location
-                                    </h6>
-                                    <p>@Model.Location</p>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <h6 class="text-muted mb-1">
-                                        <i class="fas fa-users"></i> Attendees
-                                    </h6>
-                                    <p>@Model.CurrentAttendees / @Model.MaxAttendees registered</p>
-                                    <div class="progress mb-2" style="height: 8px;">
-                                        <div class="progress-bar" role="progressbar" 
+                                    <p class="text-gray-900 mb-2">@Model.CurrentAttendees / @Model.MaxAttendees registered</p>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" 
                                              style="width: @(Model.MaxAttendees > 0 ? (double)Model.CurrentAttendees / Model.MaxAttendees * 100 : 0)%"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <h6 class="text-muted mb-1">
-                                        <i class="fas fa-building"></i> Organizer
+                                <div>
+                                    <h6 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                        <i class="fas fa-building mr-2"></i> Organizer
                                     </h6>
-                                    <p>@Model.Organizer</p>
+                                    <p class="text-gray-900">@Model.Organizer</p>
                                 </div>
                             </div>
                             
                             @if (Model.Categories?.Any() == true)
                             {
-                                <div class="mb-3">
-                                    <h6 class="text-muted mb-2">
-                                        <i class="fas fa-tags"></i> Categories
+                                <div class="mb-6">
+                                    <h6 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">
+                                        <i class="fas fa-tags mr-2"></i> Categories
                                     </h6>
-                                    @foreach (var category in Model.Categories)
-                                    {
-                                        <span class="badge bg-primary me-1">@category</span>
-                                    }
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach (var category in Model.Categories)
+                                        {
+                                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">@category</span>
+                                        }
+                                    </div>
                                 </div>
                             }
                             
-                            <div class="d-flex gap-2 flex-wrap">
+                            <div class="flex flex-wrap gap-3">
                                 @if (!string.IsNullOrEmpty(Model.Website))
                                 {
-                                    <a href="@Model.Website" target="_blank" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-external-link-alt"></i> Website
+                                    <a href="@Model.Website" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors duration-200">
+                                        <i class="fas fa-external-link-alt mr-2"></i> Website
                                     </a>
                                 }
-                                <a asp-action="Sessions" asp-route-id="@Model.Id" class="btn btn-outline-info btn-sm">
-                                    <i class="fas fa-presentation"></i> View Sessions
+                                <a asp-action="Sessions" asp-route-id="@Model.Id" class="inline-flex items-center px-4 py-2 bg-cyan-50 text-cyan-700 text-sm font-medium rounded-lg hover:bg-cyan-100 transition-colors duration-200">
+                                    <i class="fas fa-presentation mr-2"></i> View Sessions
                                 </a>
-                                <a asp-action="Speakers" asp-route-id="@Model.Id" class="btn btn-outline-warning btn-sm">
-                                    <i class="fas fa-users"></i> View Speakers
+                                <a asp-action="Speakers" asp-route-id="@Model.Id" class="inline-flex items-center px-4 py-2 bg-yellow-50 text-yellow-700 text-sm font-medium rounded-lg hover:bg-yellow-100 transition-colors duration-200">
+                                    <i class="fas fa-users mr-2"></i> View Speakers
                                 </a>
-                                <a asp-action="Attendees" asp-route-id="@Model.Id" class="btn btn-outline-success btn-sm">
-                                    <i class="fas fa-user-friends"></i> View Attendees
+                                <a asp-action="Attendees" asp-route-id="@Model.Id" class="inline-flex items-center px-4 py-2 bg-green-50 text-green-700 text-sm font-medium rounded-lg hover:bg-green-100 transition-colors duration-200">
+                                    <i class="fas fa-user-friends mr-2"></i> View Attendees
                                 </a>
-                                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-edit"></i> Edit
+                                <a asp-action="Edit" asp-route-id="@Model.Id" class="inline-flex items-center px-4 py-2 bg-gray-50 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                    <i class="fas fa-edit mr-2"></i> Edit
                                 </a>
                             </div>
                         </div>
@@ -113,76 +121,73 @@
             </div>
             
             <!-- Additional Information -->
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-info-circle"></i> Conference Information
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <dl class="row">
-                                <dt class="col-sm-4">Created:</dt>
-                                <dd class="col-sm-8">@Model.CreatedAt.ToString("MMM dd, yyyy")</dd>
-                                
-                                @if (Model.UpdatedAt.HasValue)
-                                {
-                                    <dt class="col-sm-4">Updated:</dt>
-                                    <dd class="col-sm-8">@Model.UpdatedAt.Value.ToString("MMM dd, yyyy")</dd>
-                                }
-                                
-                                <dt class="col-sm-4">ID:</dt>
-                                <dd class="col-sm-8"><small class="text-muted">@Model.Id</small></dd>
-                            </dl>
-                        </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                        <h5 class="text-lg font-semibold text-gray-900 flex items-center">
+                            <i class="fas fa-info-circle text-blue-600 mr-2"></i> Conference Information
+                        </h5>
+                    </div>
+                    <div class="p-6">
+                        <dl class="space-y-4">
+                            <div class="flex justify-between">
+                                <dt class="text-sm font-medium text-gray-500">Created:</dt>
+                                <dd class="text-sm text-gray-900">@Model.CreatedAt.ToString("MMM dd, yyyy")</dd>
+                            </div>
+                            
+                            @if (Model.UpdatedAt.HasValue)
+                            {
+                                <div class="flex justify-between">
+                                    <dt class="text-sm font-medium text-gray-500">Updated:</dt>
+                                    <dd class="text-sm text-gray-900">@Model.UpdatedAt.Value.ToString("MMM dd, yyyy")</dd>
+                                </div>
+                            }
+                            
+                            <div class="flex justify-between">
+                                <dt class="text-sm font-medium text-gray-500">ID:</dt>
+                                <dd class="text-xs text-gray-500">@Model.Id</dd>
+                            </div>
+                        </dl>
                     </div>
                 </div>
                 
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-chart-bar"></i> Quick Statistics
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row text-center">
-                                <div class="col-3">
-                                    <div class="border-end">
-                                        <i class="fas fa-users fa-2x text-primary mb-2"></i>
-                                        <h4>@Model.CurrentAttendees</h4>
-                                        <small class="text-muted">Attendees</small>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="border-end">
-                                        <i class="fas fa-microphone fa-2x text-warning mb-2"></i>
-                                        <h4>-</h4>
-                                        <small class="text-muted">Speakers</small>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="border-end">
-                                        <i class="fas fa-presentation fa-2x text-info mb-2"></i>
-                                        <h4>-</h4>
-                                        <small class="text-muted">Sessions</small>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <i class="fas fa-calendar-check fa-2x text-success mb-2"></i>
-                                    <h4>@((Model.EndDate - Model.StartDate).Days + 1)</h4>
-                                    <small class="text-muted">Days</small>
-                                </div>
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                        <h5 class="text-lg font-semibold text-gray-900 flex items-center">
+                            <i class="fas fa-chart-bar text-blue-600 mr-2"></i> Quick Statistics
+                        </h5>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-4 gap-6 text-center">
+                            <div class="space-y-2">
+                                <i class="fas fa-users text-3xl text-blue-600 mb-2"></i>
+                                <h4 class="text-2xl font-bold text-gray-900">@Model.CurrentAttendees</h4>
+                                <small class="text-sm text-gray-500">Attendees</small>
+                            </div>
+                            <div class="space-y-2">
+                                <i class="fas fa-microphone text-3xl text-yellow-600 mb-2"></i>
+                                <h4 class="text-2xl font-bold text-gray-900">-</h4>
+                                <small class="text-sm text-gray-500">Speakers</small>
+                            </div>
+                            <div class="space-y-2">
+                                <i class="fas fa-presentation text-3xl text-cyan-600 mb-2"></i>
+                                <h4 class="text-2xl font-bold text-gray-900">-</h4>
+                                <small class="text-sm text-gray-500">Sessions</small>
+                            </div>
+                            <div class="space-y-2">
+                                <i class="fas fa-calendar-check text-3xl text-green-600 mb-2"></i>
+                                <h4 class="text-2xl font-bold text-gray-900">@((Model.EndDate - Model.StartDate).Days + 1)</h4>
+                                <small class="text-sm text-gray-500">Days</small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="mt-3">
-                <a asp-action="Index" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Back to Conferences
+            <!-- Back Button -->
+            <div class="mt-6">
+                <a asp-action="Index" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Conferences
                 </a>
             </div>
         </div>
