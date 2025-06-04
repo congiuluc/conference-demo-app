@@ -1,0 +1,41 @@
+Summary
+  Generated on: 06/04/2025 - 10:58:08
+  Coverage date: 06/04/2025 - 10:53:07 - 06/04/2025 - 10:58:02
+  Parser: MultiReport (4x Cobertura)
+  Assemblies: 1
+  Classes: 19
+  Files: 15
+  Line coverage: 88.2%
+  Covered lines: 332
+  Uncovered lines: 44
+  Coverable lines: 376
+  Total lines: 1056
+  Branch coverage: 84.4% (49 of 58)
+  Covered branches: 49
+  Total branches: 58
+  Method coverage: 97.7% (129 of 132)
+  Full method coverage: 96.2% (127 of 132)
+  Covered methods: 129
+  Fully covered methods: 127
+  Total methods: 132
+
+ConferenceApp.Shared                                      88.2%
+  ConferenceApp.Shared.Models.AgendaDay                    100%
+  ConferenceApp.Shared.Models.AgendaTimeSlot               100%
+  ConferenceApp.Shared.Models.Attendee                     100%
+  ConferenceApp.Shared.Models.BaseEntity                   100%
+  ConferenceApp.Shared.Models.CallForPaper                 100%
+  ConferenceApp.Shared.Models.Conference                   100%
+  ConferenceApp.Shared.Models.Room                         100%
+  ConferenceApp.Shared.Models.Session                      100%
+  ConferenceApp.Shared.Models.Speaker                      100%
+  ConferenceApp.Shared.Models.Venue                        100%
+  ConferenceApp.Shared.Validators.AgendaDayValidator         0%
+  ConferenceApp.Shared.Validators.AttendeeValidator        100%
+  ConferenceApp.Shared.Validators.CallForPaperValidator    100%
+  ConferenceApp.Shared.Validators.ConferenceValidator     95.6%
+  ConferenceApp.Shared.Validators.SessionValidator         100%
+  ConferenceApp.Shared.Validators.SpeakerValidator        96.5%
+  ConferenceApp.Shared.Validators.TimeSlotListValidator      0%
+  ConferenceApp.Shared.Validators.TimeSlotValidator          0%
+  ConferenceApp.Shared.Validators.VenueValidator           100%
