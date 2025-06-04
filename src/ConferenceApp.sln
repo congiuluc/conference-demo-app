@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceApp.API.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceApp.UI.Tests", "ConferenceApp.UI.Tests\ConferenceApp.UI.Tests.csproj", "{B7A0DAE9-D4CB-4E97-85ED-F4D330C31898}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceApp.ServiceDefaults.Tests", "ConferenceApp.ServiceDefaults.Tests\ConferenceApp.ServiceDefaults.Tests.csproj", "{FE042819-425C-4821-9E4C-4060D5749713}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{B7A0DAE9-D4CB-4E97-85ED-F4D330C31898}.Release|x64.Build.0 = Release|Any CPU
 		{B7A0DAE9-D4CB-4E97-85ED-F4D330C31898}.Release|x86.ActiveCfg = Release|Any CPU
 		{B7A0DAE9-D4CB-4E97-85ED-F4D330C31898}.Release|x86.Build.0 = Release|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Debug|x64.Build.0 = Debug|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Debug|x86.Build.0 = Debug|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Release|x64.Build.0 = Release|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Release|x86.ActiveCfg = Release|Any CPU
+		{FE042819-425C-4821-9E4C-4060D5749713}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

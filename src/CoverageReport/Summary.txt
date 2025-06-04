@@ -1,41 +1,58 @@
 Summary
-  Generated on: 06/04/2025 - 10:58:08
-  Coverage date: 06/04/2025 - 10:53:07 - 06/04/2025 - 10:58:02
-  Parser: MultiReport (4x Cobertura)
-  Assemblies: 1
-  Classes: 19
-  Files: 15
-  Line coverage: 88.2%
-  Covered lines: 332
-  Uncovered lines: 44
-  Coverable lines: 376
-  Total lines: 1056
-  Branch coverage: 84.4% (49 of 58)
-  Covered branches: 49
-  Total branches: 58
-  Method coverage: 97.7% (129 of 132)
-  Full method coverage: 96.2% (127 of 132)
-  Covered methods: 129
-  Fully covered methods: 127
-  Total methods: 132
+  Generated on: 06/04/2025 - 11:02:45
+  Coverage date: 06/04/2025 - 10:53:07 - 06/04/2025 - 11:02:37
+  Parser: MultiReport (9x Cobertura)
+  Assemblies: 3
+  Classes: 32
+  Files: 27
+  Line coverage: 28.4%
+  Covered lines: 441
+  Uncovered lines: 1110
+  Coverable lines: 1551
+  Total lines: 3275
+  Branch coverage: 22.1% (61 of 276)
+  Covered branches: 61
+  Total branches: 276
+  Method coverage: 64.7% (143 of 221)
+  Full method coverage: 62.8% (139 of 221)
+  Covered methods: 143
+  Fully covered methods: 139
+  Total methods: 221
 
-ConferenceApp.Shared                                      88.2%
-  ConferenceApp.Shared.Models.AgendaDay                    100%
-  ConferenceApp.Shared.Models.AgendaTimeSlot               100%
-  ConferenceApp.Shared.Models.Attendee                     100%
-  ConferenceApp.Shared.Models.BaseEntity                   100%
-  ConferenceApp.Shared.Models.CallForPaper                 100%
-  ConferenceApp.Shared.Models.Conference                   100%
-  ConferenceApp.Shared.Models.Room                         100%
-  ConferenceApp.Shared.Models.Session                      100%
-  ConferenceApp.Shared.Models.Speaker                      100%
-  ConferenceApp.Shared.Models.Venue                        100%
-  ConferenceApp.Shared.Validators.AgendaDayValidator         0%
-  ConferenceApp.Shared.Validators.AttendeeValidator        100%
-  ConferenceApp.Shared.Validators.CallForPaperValidator    100%
-  ConferenceApp.Shared.Validators.ConferenceValidator     95.6%
-  ConferenceApp.Shared.Validators.SessionValidator         100%
-  ConferenceApp.Shared.Validators.SpeakerValidator        96.5%
-  ConferenceApp.Shared.Validators.TimeSlotListValidator      0%
-  ConferenceApp.Shared.Validators.TimeSlotValidator          0%
-  ConferenceApp.Shared.Validators.VenueValidator           100%
+ConferenceApp.API                                           5.2%
+  ConferenceApp.API.Endpoints.AgendaEndpoints                 0%
+  ConferenceApp.API.Endpoints.AttendeeEndpoints               0%
+  ConferenceApp.API.Endpoints.CallForPaperEndpoints           0%
+  ConferenceApp.API.Endpoints.ConferenceEndpoints             0%
+  ConferenceApp.API.Endpoints.ReviewNotesRequest            100%
+  ConferenceApp.API.Endpoints.SessionEndpoints                0%
+  ConferenceApp.API.Endpoints.SessionManagementEndpoints   38.8%
+  ConferenceApp.API.Endpoints.SpeakerEndpoints                0%
+  ConferenceApp.API.Endpoints.VenueEndpoints                  0%
+  ConferenceApp.API.Services.CosmosDbConfig                   0%
+  ConferenceApp.API.Services.CosmosDbService<T>            47.6%
+  Program                                                     0%
+
+ConferenceApp.ServiceDefaults                              83.3%
+  Microsoft.Extensions.Hosting.Extensions                  83.3%
+
+ConferenceApp.Shared                                       88.2%
+  ConferenceApp.Shared.Models.AgendaDay                     100%
+  ConferenceApp.Shared.Models.AgendaTimeSlot                100%
+  ConferenceApp.Shared.Models.Attendee                      100%
+  ConferenceApp.Shared.Models.BaseEntity                    100%
+  ConferenceApp.Shared.Models.CallForPaper                  100%
+  ConferenceApp.Shared.Models.Conference                    100%
+  ConferenceApp.Shared.Models.Room                          100%
+  ConferenceApp.Shared.Models.Session                       100%
+  ConferenceApp.Shared.Models.Speaker                       100%
+  ConferenceApp.Shared.Models.Venue                         100%
+  ConferenceApp.Shared.Validators.AgendaDayValidator          0%
+  ConferenceApp.Shared.Validators.AttendeeValidator         100%
+  ConferenceApp.Shared.Validators.CallForPaperValidator     100%
+  ConferenceApp.Shared.Validators.ConferenceValidator      95.6%
+  ConferenceApp.Shared.Validators.SessionValidator          100%
+  ConferenceApp.Shared.Validators.SpeakerValidator         96.5%
+  ConferenceApp.Shared.Validators.TimeSlotListValidator       0%
+  ConferenceApp.Shared.Validators.TimeSlotValidator           0%
+  ConferenceApp.Shared.Validators.VenueValidator            100%
