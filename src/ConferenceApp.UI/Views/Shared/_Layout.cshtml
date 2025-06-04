@@ -28,35 +28,35 @@
 </head>
 <body>
     <header>
-        <nav class="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg">
+        <nav class="bg-gray-300 shadow-lg">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
                     <div class="flex">
                         <div class="flex-shrink-0 flex items-center">
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class="text-white font-bold text-xl hover:text-blue-200 transition-colors duration-200">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="text-gray-700 font-bold text-xl hover:text-gray-900 transition-colors duration-200">
                                 <i class="fas fa-calendar-alt mr-2"></i>Conference Management
                             </a>
                         </div>
                         <div class="hidden md:ml-6 md:flex md:space-x-8">
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
                                 <i class="fas fa-home mr-1"></i>Dashboard
                             </a>
-                            <a asp-area="" asp-controller="Conferences" asp-action="Index" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            <a asp-area="" asp-controller="Conferences" asp-action="Index" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
                                 <i class="fas fa-calendar-alt mr-1"></i>Conferences
                             </a>
-                            <a asp-area="" asp-controller="Speakers" asp-action="Index" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            <a asp-area="" asp-controller="Speakers" asp-action="Index" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
                                 <i class="fas fa-users mr-1"></i>Speakers
                             </a>
-                            <a asp-area="" asp-controller="Sessions" asp-action="Index" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            <a asp-area="" asp-controller="Sessions" asp-action="Index" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
                                 <i class="fas fa-presentation mr-1"></i>Sessions
                             </a>
-                            <a asp-area="" asp-controller="Attendees" asp-action="Index" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            <a asp-area="" asp-controller="Attendees" asp-action="Index" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
                                 <i class="fas fa-user-friends mr-1"></i>Attendees
                             </a>
                         </div>
                     </div>
                     <div class="md:hidden flex items-center">
-                        <button type="button" class="text-white hover:text-blue-200 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white" onclick="toggleMobileMenu()">
+                        <button type="button" class="text-gray-700 hover:text-gray-900 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="toggleMobileMenu()">
                             <i class="fas fa-bars"></i>
                         </button>
                     </div>
@@ -64,20 +64,20 @@
             </div>
             <!-- Mobile menu -->
             <div id="mobile-menu" class="md:hidden hidden">
-                <div class="px-2 pt-2 pb-3 space-y-1 bg-blue-700">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="text-white hover:text-blue-200 block px-3 py-2 rounded-md text-base font-medium">
+                <div class="px-2 pt-2 pb-3 space-y-1 bg-gray-400">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">
                         <i class="fas fa-home mr-2"></i>Dashboard
                     </a>
-                    <a asp-area="" asp-controller="Conferences" asp-action="Index" class="text-white hover:text-blue-200 block px-3 py-2 rounded-md text-base font-medium">
+                    <a asp-area="" asp-controller="Conferences" asp-action="Index" class="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">
                         <i class="fas fa-calendar-alt mr-2"></i>Conferences
                     </a>
-                    <a asp-area="" asp-controller="Speakers" asp-action="Index" class="text-white hover:text-blue-200 block px-3 py-2 rounded-md text-base font-medium">
+                    <a asp-area="" asp-controller="Speakers" asp-action="Index" class="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">
                         <i class="fas fa-users mr-2"></i>Speakers
                     </a>
-                    <a asp-area="" asp-controller="Sessions" asp-action="Index" class="text-white hover:text-blue-200 block px-3 py-2 rounded-md text-base font-medium">
+                    <a asp-area="" asp-controller="Sessions" asp-action="Index" class="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">
                         <i class="fas fa-presentation mr-2"></i>Sessions
                     </a>
-                    <a asp-area="" asp-controller="Attendees" asp-action="Index" class="text-white hover:text-blue-200 block px-3 py-2 rounded-md text-base font-medium">
+                    <a asp-area="" asp-controller="Attendees" asp-action="Index" class="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">
                         <i class="fas fa-user-friends mr-2"></i>Attendees
                     </a>
                 </div>
@@ -90,14 +90,14 @@
         </main>
     </div>
 
-    <footer class="bg-white border-t border-gray-200">
+    <footer class="border-t border-gray-200" style="background-color: #681F79;">
         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
-                <div class="text-gray-600">
+                <div class="text-white">
                     &copy; 2025 - Conference Management System
                 </div>
                 <div>
-                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-blue-600 hover:text-blue-800 transition-colors duration-200">Privacy</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white hover:text-gray-200 transition-colors duration-200">Privacy</a>
                 </div>
             </div>
         </div>
