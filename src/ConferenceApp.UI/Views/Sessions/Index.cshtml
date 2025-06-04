@@ -4,64 +4,67 @@
     ViewData["Title"] = "Sessions";
 }
 
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>
-            <i class="bi bi-calendar-event"></i> Sessions
-        </h2>
-        <a asp-action="Create" class="btn btn-primary">
-            <i class="bi bi-plus-lg"></i> Add New Session
+<div class="space-y-6">
+    <!-- Page Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div class="flex items-center space-x-3">
+            <div class="p-2 bg-blue-100 rounded-lg">
+                <i class="fas fa-presentation text-blue-600 text-xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900">@ViewData["Title"]</h1>
+        </div>
+        <a asp-action="Create" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+            <i class="fas fa-plus mr-2"></i> Add New Session
         </a>
     </div>
 
     @if (Model.Any())
     {
-        <div class="row">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach (var session in Model)
             {
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">@session.Title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                <i class="bi bi-clock"></i> @session.StartTime.ToString("MMM dd, yyyy hh:mm tt")
-                            </h6>
-                            
-                            @if (!string.IsNullOrEmpty(session.Description))
-                            {
-                                <p class="card-text">
-                                    @(session.Description.Length > 100 ? session.Description.Substring(0, 100) + "..." : session.Description)
-                                </p>
-                            }
-                            
-                            <div class="row text-center">
-                                <div class="col">
-                                    <small class="text-muted">Duration</small>
-                                    <div>@session.Duration mins</div>
-                                </div>
-                                <div class="col">
-                                    <small class="text-muted">Capacity</small>
-                                    <div>@session.MaxAttendees</div>
-                                </div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
+                    <div class="p-6 h-full flex flex-col">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">@session.Title</h3>
+                        <p class="text-cyan-600 font-medium mb-4 flex items-center">
+                            <i class="fas fa-clock mr-2"></i> @session.StartTime.ToString("MMM dd, yyyy hh:mm tt")
+                        </p>
+                        
+                        @if (!string.IsNullOrEmpty(session.Description))
+                        {
+                            <p class="text-gray-700 text-sm mb-4 flex-grow">
+                                @(session.Description.Length > 100 ? session.Description.Substring(0, 100) + "..." : session.Description)
+                            </p>
+                        }
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-4 p-4 bg-gray-50 rounded-lg">
+                            <div class="text-center">
+                                <div class="text-sm text-gray-500 mb-1">Duration</div>
+                                <div class="font-semibold text-gray-900">@session.Duration mins</div>
                             </div>
-                            
-                            @if (!string.IsNullOrEmpty(session.Location))
-                            {
-                                <p class="card-text mt-2">
-                                    <i class="bi bi-geo-alt"></i> @session.Location
-                                </p>
-                            }
+                            <div class="text-center">
+                                <div class="text-sm text-gray-500 mb-1">Capacity</div>
+                                <div class="font-semibold text-gray-900">@session.MaxAttendees</div>
+                            </div>
                         </div>
-                        <div class="card-footer bg-transparent">
-                            <div class="btn-group w-100" role="group">
-                                <a asp-action="Details" asp-route-id="@session.Id" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> Details
+                        
+                        @if (!string.IsNullOrEmpty(session.Location))
+                        {
+                            <p class="text-gray-600 text-sm mb-4 flex items-center">
+                                <i class="fas fa-map-marker-alt mr-2"></i> @session.Location
+                            </p>
+                        }
+                        
+                        <div class="space-y-2 mt-auto">
+                            <div class="flex space-x-2">
+                                <a asp-action="Details" asp-route-id="@session.Id" class="flex-1 px-3 py-2 bg-blue-50 text-blue-700 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors duration-200 text-center">
+                                    <i class="fas fa-eye mr-1"></i> Details
                                 </a>
-                                <a asp-action="Edit" asp-route-id="@session.Id" class="btn btn-outline-secondary btn-sm">
-                                    <i class="bi bi-pencil"></i> Edit
+                                <a asp-action="Edit" asp-route-id="@session.Id" class="flex-1 px-3 py-2 bg-gray-50 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200 text-center">
+                                    <i class="fas fa-edit mr-1"></i> Edit
                                 </a>
-                                <a asp-action="Delete" asp-route-id="@session.Id" class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash"></i> Delete
+                                <a asp-action="Delete" asp-route-id="@session.Id" class="flex-1 px-3 py-2 bg-red-50 text-red-700 text-sm font-medium rounded-lg hover:bg-red-100 transition-colors duration-200 text-center">
+                                    <i class="fas fa-trash mr-1"></i> Delete
                                 </a>
                             </div>
                         </div>
@@ -72,12 +75,12 @@
     }
     else
     {
-        <div class="text-center py-5">
-            <i class="bi bi-calendar-event display-1 text-muted"></i>
-            <h3 class="mt-3">No Sessions Found</h3>
-            <p class="text-muted">Get started by adding your first session.</p>
-            <a asp-action="Create" class="btn btn-primary">
-                <i class="bi bi-plus-lg"></i> Add First Session
+        <div class="text-center py-12 bg-white rounded-xl shadow-md">
+            <i class="fas fa-presentation text-5xl text-gray-400 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">No Sessions Found</h3>
+            <p class="text-gray-600 mb-6">Get started by adding your first session.</p>
+            <a asp-action="Create" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                <i class="fas fa-plus mr-2"></i> Add First Session
             </a>
         </div>
     }
