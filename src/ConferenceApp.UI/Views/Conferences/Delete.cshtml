@@ -4,68 +4,105 @@
     ViewData["Title"] = "Delete Conference";
 }
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card border-danger">
-                <div class="card-header bg-danger text-white">
-                    <h3 class="card-title mb-0">
-                        <i class="bi bi-exclamation-triangle"></i> Delete Conference
-                    </h3>
+<div class="space-y-6">
+    <!-- Page Header -->
+    <div class="flex items-center space-x-3">
+        <div class="p-2 bg-red-100 rounded-lg">
+            <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900">Delete Conference</h1>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border-2 border-red-200">
+            <div class="px-6 py-4 bg-red-50 border-b border-red-200">
+                <h3 class="text-lg font-semibold text-red-900 flex items-center">
+                    <i class="fas fa-exclamation-triangle text-red-600 mr-2"></i> Delete Conference
+                </h3>
+            </div>
+            <div class="p-6">
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-triangle text-yellow-600 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="text-yellow-800 font-medium">Warning!</h4>
+                            <p class="text-yellow-700 text-sm mt-1">This action cannot be undone. Are you sure you want to delete this conference?</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="alert alert-warning">
-                        <i class="bi bi-exclamation-triangle-fill"></i>
-                        <strong>Warning!</strong> This action cannot be undone. Are you sure you want to delete this conference?
+
+                <div class="space-y-4 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <span class="text-sm font-medium text-gray-500">Name:</span>
+                            <p class="text-gray-900 font-medium">@Model.Name</p>
+                        </div>
+                        <div>
+                            <span class="text-sm font-medium text-gray-500">Location:</span>
+                            <p class="text-gray-900">@Model.Location</p>
+                        </div>
+                        <div>
+                            <span class="text-sm font-medium text-gray-500">Max Attendees:</span>
+                            <p class="text-gray-900">@Model.MaxAttendees</p>
+                        </div>
                     </div>
 
-                    <dl class="row">
-                        <dt class="col-sm-3">Name:</dt>
-                        <dd class="col-sm-9">@Model.Name</dd>
+                    <div>
+                        <span class="text-sm font-medium text-gray-500">Description:</span>
+                        <p class="text-gray-900 mt-1">@Model.Description</p>
+                    </div>
 
-                        <dt class="col-sm-3">Description:</dt>
-                        <dd class="col-sm-9">@Model.Description</dd>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <span class="text-sm font-medium text-gray-500">Start Date:</span>
+                            <p class="text-gray-900">@Model.StartDate.ToString("MMMM dd, yyyy 'at' hh:mm tt")</p>
+                        </div>
+                        <div>
+                            <span class="text-sm font-medium text-gray-500">End Date:</span>
+                            <p class="text-gray-900">@Model.EndDate.ToString("MMMM dd, yyyy 'at' hh:mm tt")</p>
+                        </div>
+                    </div>
 
-                        <dt class="col-sm-3">Location:</dt>
-                        <dd class="col-sm-9">@Model.Location</dd>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <span class="text-sm font-medium text-gray-500">Status:</span>
+                            <div class="mt-1">
+                                @if (Model.IsActive)
+                                {
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">Inactive</span>
+                                }
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-sm font-medium text-gray-500">Created:</span>
+                            <p class="text-gray-900">@Model.CreatedDate.ToString("MM/dd/yyyy")</p>
+                        </div>
+                        <div>
+                            <span class="text-sm font-medium text-gray-500">Last Updated:</span>
+                            <p class="text-gray-900">@(Model.ModifiedDate?.ToString("MM/dd/yyyy") ?? "Never")</p>
+                        </div>
+                    </div>
+                </div>
 
-                        <dt class="col-sm-3">Start Date:</dt>
-                        <dd class="col-sm-9">@Model.StartDate.ToString("MMMM dd, yyyy 'at' hh:mm tt")</dd>
-
-                        <dt class="col-sm-3">End Date:</dt>
-                        <dd class="col-sm-9">@Model.EndDate.ToString("MMMM dd, yyyy 'at' hh:mm tt")</dd>
-
-                        <dt class="col-sm-3">Max Attendees:</dt>
-                        <dd class="col-sm-9">@Model.MaxAttendees</dd>
-
-                        <dt class="col-sm-3">Status:</dt>
-                        <dd class="col-sm-9">
-                            <span class="badge @(Model.IsActive ? "bg-success" : "bg-secondary")">
-                                @(Model.IsActive ? "Active" : "Inactive")
-                            </span>
-                        </dd>
-
-                        <dt class="col-sm-3">Created:</dt>
-                        <dd class="col-sm-9">@Model.CreatedDate.ToString("MM/dd/yyyy")</dd>
-
-                        <dt class="col-sm-3">Last Updated:</dt>
-                        <dd class="col-sm-9">@(Model.ModifiedDate?.ToString("MM/dd/yyyy") ?? "Never")</dd>
-                    </dl>
-
-                    <form asp-action="DeleteConfirmed" method="post" class="d-inline">
+                <div class="flex flex-col sm:flex-row justify-between gap-4 pt-6 border-t border-gray-200">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a asp-action="Index" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                            <i class="fas fa-arrow-left mr-2"></i> Cancel
+                        </a>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="inline-flex items-center px-4 py-2 bg-cyan-50 text-cyan-700 text-sm font-medium rounded-lg hover:bg-cyan-100 transition-colors duration-200">
+                            <i class="fas fa-eye mr-2"></i> View Details
+                        </a>
+                    </div>
+                    <form asp-action="DeleteConfirmed" method="post" class="inline">
                         <input type="hidden" asp-for="Id" />
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you absolutely sure you want to delete this conference? This action cannot be undone.')">
-                            <i class="bi bi-trash3"></i> Yes, Delete Conference
+                        <button type="submit" class="inline-flex items-center px-6 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors duration-200" onclick="return confirm('Are you absolutely sure you want to delete this conference? This action cannot be undone.')">
+                            <i class="fas fa-trash mr-2"></i> Yes, Delete Conference
                         </button>
                     </form>
-                    
-                    <a asp-action="Index" class="btn btn-secondary">
-                        <i class="bi bi-arrow-left"></i> Cancel
-                    </a>
-                    
-                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info">
-                        <i class="bi bi-eye"></i> View Details
-                    </a>
                 </div>
             </div>
         </div>

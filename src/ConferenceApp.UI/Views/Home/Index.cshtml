@@ -3,270 +3,231 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <h1 class="h3 mb-4">
-                <i class="fas fa-tachometer-alt"></i> Conference Management Dashboard
-            </h1>
+<div class="space-y-6">
+    <!-- Page Header -->
+    <div class="flex items-center space-x-3">
+        <div class="p-2 bg-blue-100 rounded-lg">
+            <i class="fas fa-tachometer-alt text-blue-600 text-xl"></i>
         </div>
+        <h1 class="text-3xl font-bold text-gray-900">Conference Management Dashboard</h1>
     </div>
 
     <!-- Statistics Cards -->
-    <div class="row mb-4">
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Active Conferences
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalConferences</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar-alt fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500 hover:shadow-lg transition-shadow duration-200">
+            <div class="flex items-center">
+                <div class="flex-1">
+                    <div class="text-sm font-medium text-blue-600 uppercase tracking-wide">Active Conferences</div>
+                    <div class="text-2xl font-bold text-gray-900 mt-1">@Model.TotalConferences</div>
+                </div>
+                <div class="flex-shrink-0">
+                    <i class="fas fa-calendar-alt text-3xl text-gray-400"></i>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Total Speakers
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalSpeakers</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition-shadow duration-200">
+            <div class="flex items-center">
+                <div class="flex-1">
+                    <div class="text-sm font-medium text-green-600 uppercase tracking-wide">Total Speakers</div>
+                    <div class="text-2xl font-bold text-gray-900 mt-1">@Model.TotalSpeakers</div>
+                </div>
+                <div class="flex-shrink-0">
+                    <i class="fas fa-users text-3xl text-gray-400"></i>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Total Sessions
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalSessions</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-presentation fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-cyan-500 hover:shadow-lg transition-shadow duration-200">
+            <div class="flex items-center">
+                <div class="flex-1">
+                    <div class="text-sm font-medium text-cyan-600 uppercase tracking-wide">Total Sessions</div>
+                    <div class="text-2xl font-bold text-gray-900 mt-1">@Model.TotalSessions</div>
+                </div>
+                <div class="flex-shrink-0">
+                    <i class="fas fa-presentation text-3xl text-gray-400"></i>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Total Attendees
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalAttendees</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-friends fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-500 hover:shadow-lg transition-shadow duration-200">
+            <div class="flex items-center">
+                <div class="flex-1">
+                    <div class="text-sm font-medium text-yellow-600 uppercase tracking-wide">Total Attendees</div>
+                    <div class="text-2xl font-bold text-gray-900 mt-1">@Model.TotalAttendees</div>
+                </div>
+                <div class="flex-shrink-0">
+                    <i class="fas fa-user-friends text-3xl text-gray-400"></i>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
+    <!-- Content Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Active Conferences -->
-        <div class="col-xl-6 col-lg-6">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        <i class="fas fa-calendar-alt"></i> Active Conferences
-                    </h6>
-                    <a asp-controller="Conferences" asp-action="Index" class="btn btn-sm btn-primary">View All</a>
-                </div>
-                <div class="card-body">
-                    @if (Model.ActiveConferences?.Any() == true)
-                    {
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <i class="fas fa-calendar-alt text-blue-600 mr-2"></i>
+                    Active Conferences
+                </h2>
+                <a asp-controller="Conferences" asp-action="Index" class="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                    View All
+                </a>
+            </div>
+            <div class="p-6">
+                @if (Model.ActiveConferences?.Any() == true)
+                {
+                    <div class="space-y-4">
                         @foreach (var conference in Model.ActiveConferences)
                         {
-                            <div class="d-flex align-items-center mb-3 p-2 border rounded">
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">
-                                        <a asp-controller="Conferences" asp-action="Details" asp-route-id="@conference.Id" class="text-decoration-none">
-                                            @conference.Name
-                                        </a>
-                                    </h6>
-                                    <small class="text-muted">
-                                        <i class="fas fa-map-marker-alt"></i> @conference.Location |
-                                        <i class="fas fa-calendar"></i> @conference.StartDate.ToString("MMM dd") - @conference.EndDate.ToString("MMM dd, yyyy")
-                                    </small>
-                                    <div class="mt-1">
-                                        <small class="text-muted">@conference.CurrentAttendees/@conference.MaxAttendees attendees</small>
-                                        <div class="progress" style="height: 4px;">
-                                            <div class="progress-bar" role="progressbar" 
-                                                 style="width: @(conference.MaxAttendees > 0 ? (conference.CurrentAttendees * 100 / conference.MaxAttendees) : 0)%"></div>
+                            <div class="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow duration-200">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex-1">
+                                        <h3 class="text-lg font-medium text-gray-900 mb-1">
+                                            <a asp-controller="Conferences" asp-action="Details" asp-route-id="@conference.Id" class="hover:text-blue-600 transition-colors duration-200">
+                                                @conference.Name
+                                            </a>
+                                        </h3>
+                                        <div class="text-sm text-gray-600 mb-2 space-y-1">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                                                @conference.Location
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fas fa-calendar mr-2 text-gray-400"></i>
+                                                @conference.StartDate.ToString("MMM dd") - @conference.EndDate.ToString("MMM dd, yyyy")
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm text-gray-600">@conference.CurrentAttendees/@conference.MaxAttendees attendees</span>
+                                            <div class="flex-1 bg-gray-200 rounded-full h-2">
+                                                <div class="bg-blue-600 h-2 rounded-full" style="width: @(conference.MaxAttendees > 0 ? (conference.CurrentAttendees * 100 / conference.MaxAttendees) : 0)%"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="ms-2">
-                                    @if (conference.IsActive)
-                                    {
-                                        <span class="badge bg-success">Active</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge bg-secondary">Inactive</span>
-                                    }
+                                    <div class="ml-4">
+                                        @if (conference.IsActive)
+                                        {
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">Inactive</span>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         }
-                    }
-                    else
-                    {
-                        <div class="text-center py-4">
-                            <i class="fas fa-calendar-alt fa-3x text-muted mb-3"></i>
-                            <p class="text-muted">No active conferences found.</p>
-                            <a asp-controller="Conferences" asp-action="Create" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Create Conference
-                            </a>
-                        </div>
-                    }
-                </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-8">
+                        <i class="fas fa-calendar-alt text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600 mb-4">No active conferences found.</p>
+                        <a asp-controller="Conferences" asp-action="Create" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>
+                            Create Conference
+                        </a>
+                    </div>
+                }
             </div>
         </div>
 
         <!-- Upcoming Sessions -->
-        <div class="col-xl-6 col-lg-6">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        <i class="fas fa-presentation"></i> Upcoming Sessions
-                    </h6>
-                    <a asp-controller="Sessions" asp-action="Index" class="btn btn-sm btn-primary">View All</a>
-                </div>
-                <div class="card-body">
-                    @if (Model.UpcomingSessions?.Any() == true)
-                    {
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <i class="fas fa-presentation text-blue-600 mr-2"></i>
+                    Upcoming Sessions
+                </h2>
+                <a asp-controller="Sessions" asp-action="Index" class="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                    View All
+                </a>
+            </div>
+            <div class="p-6">
+                @if (Model.UpcomingSessions?.Any() == true)
+                {
+                    <div class="space-y-4">
                         @foreach (var session in Model.UpcomingSessions)
                         {
-                            <div class="d-flex align-items-center mb-3 p-2 border rounded">
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">
-                                        <a asp-controller="Sessions" asp-action="Details" asp-route-id="@session.Id" class="text-decoration-none">
-                                            @session.Title
-                                        </a>
-                                    </h6>
-                                    @if (session.ScheduledStartTime.HasValue)
-                                    {
-                                        <small class="text-muted">
-                                            <i class="fas fa-clock"></i> @session.ScheduledStartTime.Value.ToString("MMM dd, yyyy - HH:mm")
-                                        </small>
-                                    }
-                                    @if (!string.IsNullOrEmpty(session.Room))
-                                    {
-                                        <br />
-                                        <small class="text-muted">
-                                            <i class="fas fa-map-marker-alt"></i> @session.Room
-                                        </small>
-                                    }
-                                </div>
-                                <div class="ms-2">
-                                    <span class="badge bg-info">@session.Type</span>
+                            <div class="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow duration-200">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex-1">
+                                        <h3 class="text-lg font-medium text-gray-900 mb-1">
+                                            <a asp-controller="Sessions" asp-action="Details" asp-route-id="@session.Id" class="hover:text-blue-600 transition-colors duration-200">
+                                                @session.Title
+                                            </a>
+                                        </h3>
+                                        <div class="text-sm text-gray-600 space-y-1">
+                                            @if (session.ScheduledStartTime.HasValue)
+                                            {
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-clock mr-2 text-gray-400"></i>
+                                                    @session.ScheduledStartTime.Value.ToString("MMM dd, yyyy - HH:mm")
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(session.Room))
+                                            {
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                                                    @session.Room
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <span class="px-2 py-1 bg-cyan-100 text-cyan-800 text-xs font-medium rounded-full">@session.Type</span>
+                                    </div>
                                 </div>
                             </div>
                         }
-                    }
-                    else
-                    {
-                        <div class="text-center py-4">
-                            <i class="fas fa-presentation fa-3x text-muted mb-3"></i>
-                            <p class="text-muted">No upcoming sessions scheduled.</p>
-                            <a asp-controller="Sessions" asp-action="Create" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Create Session
-                            </a>
-                        </div>
-                    }
-                </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-8">
+                        <i class="fas fa-presentation text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600 mb-4">No upcoming sessions scheduled.</p>
+                        <a asp-controller="Sessions" asp-action="Create" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>
+                            Create Session
+                        </a>
+                    </div>
+                }
             </div>
         </div>
     </div>
 
     <!-- Quick Actions -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        <i class="fas fa-bolt"></i> Quick Actions
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <a asp-controller="Conferences" asp-action="Create" class="btn btn-outline-primary btn-lg w-100">
-                                <i class="fas fa-calendar-plus fa-2x mb-2"></i>
-                                <br />
-                                New Conference
-                            </a>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <a asp-controller="Speakers" asp-action="Create" class="btn btn-outline-success btn-lg w-100">
-                                <i class="fas fa-user-plus fa-2x mb-2"></i>
-                                <br />
-                                Add Speaker
-                            </a>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <a asp-controller="Sessions" asp-action="Create" class="btn btn-outline-info btn-lg w-100">
-                                <i class="fas fa-plus-square fa-2x mb-2"></i>
-                                <br />
-                                Create Session
-                            </a>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <a asp-controller="Attendees" asp-action="Create" class="btn btn-outline-warning btn-lg w-100">
-                                <i class="fas fa-user-check fa-2x mb-2"></i>
-                                <br />
-                                Register Attendee
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+            <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                <i class="fas fa-bolt text-blue-600 mr-2"></i>
+                Quick Actions
+            </h2>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a asp-controller="Conferences" asp-action="Create" class="group p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border-2 border-blue-200 hover:border-blue-400 transition-all duration-200 text-center">
+                    <i class="fas fa-calendar-plus text-4xl text-blue-600 mb-3 group-hover:scale-110 transition-transform duration-200"></i>
+                    <div class="text-lg font-medium text-blue-900">New Conference</div>
+                </a>
+                <a asp-controller="Speakers" asp-action="Create" class="group p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border-2 border-green-200 hover:border-green-400 transition-all duration-200 text-center">
+                    <i class="fas fa-user-plus text-4xl text-green-600 mb-3 group-hover:scale-110 transition-transform duration-200"></i>
+                    <div class="text-lg font-medium text-green-900">Add Speaker</div>
+                </a>
+                <a asp-controller="Sessions" asp-action="Create" class="group p-6 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl border-2 border-cyan-200 hover:border-cyan-400 transition-all duration-200 text-center">
+                    <i class="fas fa-plus-square text-4xl text-cyan-600 mb-3 group-hover:scale-110 transition-transform duration-200"></i>
+                    <div class="text-lg font-medium text-cyan-900">Create Session</div>
+                </a>
+                <a asp-controller="Attendees" asp-action="Create" class="group p-6 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl border-2 border-yellow-200 hover:border-yellow-400 transition-all duration-200 text-center">
+                    <i class="fas fa-user-check text-4xl text-yellow-600 mb-3 group-hover:scale-110 transition-transform duration-200"></i>
+                    <div class="text-lg font-medium text-yellow-900">Register Attendee</div>
+                </a>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-    .border-left-primary {
-        border-left: 0.25rem solid #4e73df !important;
-    }
-    .border-left-success {
-        border-left: 0.25rem solid #1cc88a !important;
-    }
-    .border-left-info {
-        border-left: 0.25rem solid #36b9cc !important;
-    }
-    .border-left-warning {
-        border-left: 0.25rem solid #f6c23e !important;
-    }
-    .text-gray-300 {
-        color: #dddfeb !important;
-    }
-    .text-gray-800 {
-        color: #5a5c69 !important;
-    }
-</style>

@@ -4,85 +4,85 @@
     ViewData["Title"] = "Create Speaker";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
+<div class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="lg:col-span-2">
             <h2>Add New Speaker</h2>
             
             <form asp-action="Create" method="post" class="needs-validation" novalidate>
-                <div class="mb-3">
-                    <label asp-for="Name" class="form-label"></label>
-                    <input asp-for="Name" class="form-control" required />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="mb-6">
+                    <label asp-for="Name" class="block text-sm font-medium text-gray-700 mb-2"></label>
+                    <input asp-for="Name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required />
+                    <span asp-validation-for="Name" class="text-red-600 text-sm"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Title" class="form-label"></label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
+                <div class="mb-6">
+                    <label asp-for="Title" class="block text-sm font-medium text-gray-700 mb-2"></label>
+                    <input asp-for="Title" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                    <span asp-validation-for="Title" class="text-red-600 text-sm"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Company" class="form-label"></label>
-                    <input asp-for="Company" class="form-control" />
-                    <span asp-validation-for="Company" class="text-danger"></span>
+                <div class="mb-6">
+                    <label asp-for="Company" class="block text-sm font-medium text-gray-700 mb-2"></label>
+                    <input asp-for="Company" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                    <span asp-validation-for="Company" class="text-red-600 text-sm"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Email" class="form-label"></label>
-                    <input asp-for="Email" type="email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="mb-6">
+                    <label asp-for="Email" class="block text-sm font-medium text-gray-700 mb-2"></label>
+                    <input asp-for="Email" type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                    <span asp-validation-for="Email" class="text-red-600 text-sm"></span>
                     <div class="form-text">We'll use this to contact the speaker.</div>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Phone" class="form-label"></label>
-                    <input asp-for="Phone" type="tel" class="form-control" />
-                    <span asp-validation-for="Phone" class="text-danger"></span>
+                <div class="mb-6">
+                    <label asp-for="Phone" class="block text-sm font-medium text-gray-700 mb-2"></label>
+                    <input asp-for="Phone" type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                    <span asp-validation-for="Phone" class="text-red-600 text-sm"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Bio" class="form-label"></label>
-                    <textarea asp-for="Bio" class="form-control" rows="5" placeholder="Tell us about the speaker's background and expertise..."></textarea>
-                    <span asp-validation-for="Bio" class="text-danger"></span>
+                <div class="mb-6">
+                    <label asp-for="Bio" class="block text-sm font-medium text-gray-700 mb-2"></label>
+                    <textarea asp-for="Bio" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="5" placeholder="Tell us about the speaker's background and expertise..."></textarea>
+                    <span asp-validation-for="Bio" class="text-red-600 text-sm"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Website" class="form-label"></label>
-                    <input asp-for="Website" type="url" class="form-control" placeholder="https://example.com" />
-                    <span asp-validation-for="Website" class="text-danger"></span>
-                </div>                <div class="mb-3">
-                    <label asp-for="TwitterHandle" class="form-label"></label>
+                <div class="mb-6">
+                    <label asp-for="Website" class="block text-sm font-medium text-gray-700 mb-2"></label>
+                    <input asp-for="Website" type="url" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="https://example.com" />
+                    <span asp-validation-for="Website" class="text-red-600 text-sm"></span>
+                </div>                <div class="mb-6">
+                    <label asp-for="TwitterHandle" class="block text-sm font-medium text-gray-700 mb-2"></label>
                     <div class="input-group">
                         <span class="input-group-text">@@</span>
-                        <input asp-for="TwitterHandle" class="form-control" placeholder="username" />
+                        <input asp-for="TwitterHandle" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="username" />
                     </div>
-                    <span asp-validation-for="TwitterHandle" class="text-danger"></span>
+                    <span asp-validation-for="TwitterHandle" class="text-red-600 text-sm"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="LinkedInProfile" class="form-label"></label>
-                    <input asp-for="LinkedInProfile" type="url" class="form-control" placeholder="https://linkedin.com/in/username" />
-                    <span asp-validation-for="LinkedInProfile" class="text-danger"></span>
+                <div class="mb-6">
+                    <label asp-for="LinkedInProfile" class="block text-sm font-medium text-gray-700 mb-2"></label>
+                    <input asp-for="LinkedInProfile" type="url" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="https://linkedin.com/in/username" />
+                    <span asp-validation-for="LinkedInProfile" class="text-red-600 text-sm"></span>
                 </div>
 
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">
+                <div class="mb-6">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
                         <i class="bi bi-check-lg"></i> Create Speaker
                     </button>
-                    <a asp-action="Index" class="btn btn-secondary">
+                    <a asp-action="Index" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors duration-200">
                         <i class="bi bi-arrow-left"></i> Back to List
                     </a>
                 </div>
             </form>
         </div>
         
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
                     <h5 class="card-title mb-0">Tips for Adding Speakers</h5>
                 </div>
-                <div class="card-body">
+                <div class="p-6">
                     <ul class="list-unstyled">
                         <li><i class="bi bi-check-circle text-success"></i> Include a professional headshot if possible</li>
                         <li><i class="bi bi-check-circle text-success"></i> Write a compelling bio highlighting expertise</li>
