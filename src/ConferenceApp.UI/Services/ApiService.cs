@@ -178,7 +178,7 @@ public class ApiService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/speakers/by-conference/{conferenceId}");
+            var response = await _httpClient.GetAsync($"api/speakers/conference/{conferenceId}");
             response.EnsureSuccessStatusCode();
             
             var jsonContent = await response.Content.ReadAsStringAsync();
