@@ -32,8 +32,11 @@ public class CallForPaperValidator : AbstractValidator<CallForPaper>
             .NotNull().WithMessage("Topics collection cannot be null");
             
         RuleFor(x => x.SessionTypes)
-            .NotNull().WithMessage("Session types collection cannot be null")
-            .Must(st => st.Count > 0).WithMessage("At least one session type must be specified");
+            .NotNull().WithMessage("Session types collection cannot be null");
+            
+        RuleFor(x => x.SessionTypes)
+            .Must(st => st.Count > 0).WithMessage("At least one session type must be specified")
+            .When(x => x.SessionTypes != null);
             
         RuleFor(x => x.ContactEmail)
             .EmailAddress().WithMessage("A valid contact email is required")
