@@ -92,6 +92,20 @@
                                     }
                                 </dd>
 
+                                <dt class="col-sm-4">Telegram:</dt>
+                                <dd class="col-sm-8">
+                                    @if (!string.IsNullOrEmpty(Model.TelegramUsername))
+                                    {
+                                        <a href="https://t.me/@Model.TelegramUsername" target="_blank" rel="noopener">
+                                            @@@@Model.TelegramUsername <i class="bi bi-box-arrow-up-right"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Not provided</span>
+                                    }
+                                </dd>
+
                                 <dt class="col-sm-4">Added:</dt>
                                 <dd class="col-sm-8">@Model.CreatedDate.ToString("MM/dd/yyyy")</dd>
                             </dl>

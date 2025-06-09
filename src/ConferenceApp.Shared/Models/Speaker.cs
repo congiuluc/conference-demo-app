@@ -100,4 +100,20 @@ public class Speaker : BaseEntity
                 SocialMedia.Remove("LinkedIn");
         }
     }
+
+    /// <summary>
+    /// Telegram username - compatibility property
+    /// </summary>
+    public string? TelegramUsername
+    {
+        get => SocialMedia?.GetValueOrDefault("Telegram");
+        set
+        {
+            SocialMedia ??= new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(value))
+                SocialMedia["Telegram"] = value;
+            else
+                SocialMedia.Remove("Telegram");
+        }
+    }
 }
