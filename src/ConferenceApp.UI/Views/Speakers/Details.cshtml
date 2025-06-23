@@ -91,6 +91,19 @@
                                         <span class="text-muted">Not provided</span>
                                     }
                                 </dd>
+                                <dt class="col-sm-4">Sessionize:</dt>
+                                <dd class="col-sm-8">
+                                    @if (!string.IsNullOrEmpty(Model.SessionizeProfileUrl))
+                                    {
+                                        <a href="@Model.SessionizeProfileUrl" target="_blank" rel="noopener">
+                                            Sessionize Profile <i class="bi bi-box-arrow-up-right"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Not provided</span>
+                                    }
+                                </dd>
 
                                 <dt class="col-sm-4">Added:</dt>
                                 <dd class="col-sm-8">@Model.CreatedDate.ToString("MM/dd/yyyy")</dd>

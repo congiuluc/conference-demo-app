@@ -34,6 +34,10 @@ public class SpeakerValidator : AbstractValidator<Speaker>
             .Must(BeAValidUrl).When(x => !string.IsNullOrEmpty(x.Website))
             .WithMessage("Website must be a valid URL");
             
+        RuleFor(x => x.SessionizeProfileUrl)
+            .Must(BeAValidUrl).When(x => !string.IsNullOrEmpty(x.SessionizeProfileUrl))
+            .WithMessage("Sessionize profile URL must be a valid URL");
+            
         RuleFor(x => x.ConferenceIds)
             .NotNull().WithMessage("ConferenceIds collection cannot be null");
     }
