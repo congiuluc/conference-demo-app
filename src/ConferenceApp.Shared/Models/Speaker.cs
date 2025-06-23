@@ -100,4 +100,20 @@ public class Speaker : BaseEntity
                 SocialMedia.Remove("LinkedIn");
         }
     }
+
+    /// <summary>
+    /// Sessionize profile URL - compatibility property
+    /// </summary>
+    public string? SessionizeProfileUrl
+    {
+        get => SocialMedia?.GetValueOrDefault("Sessionize");
+        set
+        {
+            SocialMedia ??= new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(value))
+                SocialMedia["Sessionize"] = value;
+            else
+                SocialMedia.Remove("Sessionize");
+        }
+    }
 }

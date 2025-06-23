@@ -65,6 +65,11 @@
                     <input asp-for="LinkedInProfile" type="url" class="form-control" placeholder="https://linkedin.com/in/username" />
                     <span asp-validation-for="LinkedInProfile" class="text-danger"></span>
                 </div>
+                <div class="mb-3">
+                    <label asp-for="SessionizeProfileUrl" class="form-label"></label>
+                    <input asp-for="SessionizeProfileUrl" type="url" class="form-control" placeholder="https://sessionize.com/your-profile" />
+                    <span asp-validation-for="SessionizeProfileUrl" class="text-danger"></span>
+                </div>
 
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">
